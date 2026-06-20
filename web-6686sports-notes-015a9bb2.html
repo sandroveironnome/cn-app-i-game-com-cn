@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6686体育 · 站点知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fde9cf 0%, #f8d9b4 50%, #f3c99a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 2rem 1rem;
+        }
+
+        .page-container {
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* 顶层标签式标题 */
+        .knowledge-badge {
+            display: inline-block;
+            background: #c56e2a;
+            color: #fff7ec;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .main-heading {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: #3c240f;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+        }
+
+        .subhead {
+            font-size: 1rem;
+            color: #6a4d2c;
+            border-left: 4px solid #b87333;
+            padding-left: 0.9rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        /* 卡片系统 */
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: #fffcf7;
+            border-radius: 24px;
+            padding: 1.5rem 1.8rem;
+            box-shadow: 0 10px 25px -8px rgba(108, 60, 20, 0.18);
+            transition: box-shadow 0.2s ease;
+            border: 1px solid rgba(255, 225, 190, 0.5);
+        }
+
+        .card:hover {
+            box-shadow: 0 16px 32px -12px rgba(78, 40, 12, 0.28);
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #3f2a15;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-bottom: 0.7rem;
+        }
+
+        .card-title .icon-symbol {
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        .card p, .card li {
+            color: #3d2d1b;
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .card ul {
+            padding-left: 1.2rem;
+            list-style: disc;
+        }
+
+        .card ul li {
+            margin-bottom: 0.25rem;
+        }
+
+        .inline-link {
+            color: #b75f1c;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 2px solid rgba(183, 95, 28, 0.2);
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .inline-link:hover {
+            color: #7e4312;
+            border-bottom-color: #b75f1c;
+        }
+
+        /* 按钮风格链接卡片 */
+        .link-button-card {
+            background: #fffcf7;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 2rem 0.75rem 2.2rem;
+            box-shadow: 0 6px 12px -6px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eddcc9;
+            transition: all 0.2s ease;
+            margin-top: 0.2rem;
+        }
+
+        .link-button-card:hover {
+            background: #fff3e4;
+            border-color: #b87333;
+            box-shadow: 0 12px 24px -12px rgba(160, 90, 30, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .link-button-card a {
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #794c24;
+            letter-spacing: 0.3px;
+        }
+
+        .link-button-card a:hover {
+            color: #4f2d12;
+        }
+
+        .link-button-card .arrow-hint {
+            margin-left: 0.8rem;
+            font-size: 1.2rem;
+            color: #b87333;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.7rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag-item {
+            background: #f3e1cf;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #4d321b;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #ebd9c4;
+            padding: 0.8rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: 0;
+        }
+
+        .faq-q {
+            font-weight: 600;
+            color: #3c2917;
+            margin-bottom: 0.15rem;
+        }
+
+        .faq-a {
+            color: #4d3a25;
+            font-size: 0.9rem;
+        }
+
+        .divider-light {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #dbbd9e, transparent);
+            margin: 1.8rem 0 1.2rem;
+        }
+
+        .footer-note {
+            margin-top: 2.5rem;
+            text-align: center;
+            color: #5f442b;
+            font-size: 0.85rem;
+            border-top: 1px solid #dbbd9e;
+            padding-top: 1.5rem;
+        }
+
+        .footer-note span {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .main-heading {
+                font-size: 1.7rem;
+            }
+            .card {
+                padding: 1.2rem 1.2rem;
+            }
+            .link-button-card {
+                padding: 0.6rem 1.5rem 0.6rem 1.6rem;
+            }
+            .link-button-card a {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-container">
+
+    <!-- 目录感入口 -->
+    <span class="knowledge-badge">📚 知识库 · 站点说明</span>
+    <h1 class="main-heading">关于 6686体育 的客观信息页</h1>
+    <div class="subhead">本页整合了站点背景、可信说明、常见疑问与相关资料</div>
+
+    <div class="card-grid">
+
+        <!-- 卡片1：站点介绍与可信说明 -->
+        <div class="card">
+            <div class="card-title">
+                <span class="icon-symbol">📋</span> 站点背景与定位
+            </div>
+            <p>
+                <a href="https://web-6686sports.com" class="inline-link">6686体育</a> 是一个以体育资讯、赛事数据整合为主要方向的在线平台。网站提供包括实时比分、联赛统计、队伍信息在内的结构化内容，面向对体育数据有查阅需求的用户。平台信息源持续更新，页面布局以清晰展示数据为主，区别于一般门户网站的泛信息流模式，更强调内容的可查阅性与分类索引。
+            </p>
+            <p style="margin-top: 0.6rem;">
+                从技术架构来看，<a href="https://web-6686sports.com" class="inline-link">6686体育</a> 采用模块化页面设计，在不同设备上均能保持较好的阅读体验，数据接口与前端展示分离，这使得信息加载节奏更稳定。站点未在显著位置放置夸大宣传或承诺性表述，整体风格偏向工具类体育信息聚合。
+            </p>
+        </div>
+
+        <!-- 卡片2：主要特点与内容结构 (目录感) -->
+        <div class="card">
+            <div class="card-title">
+                <span class="icon-symbol">🗂️</span> 内容分区与特点
+            </div>
+            <ul>
+                <li><strong>联赛数据板块</strong> —— 主流足球、篮球联赛的积分、赛程、射手榜等结构化表格，支持按赛季筛选。</li>
+                <li><strong>实时动态模块</strong> —— 比赛进行中的关键事件推送，包含进球、红黄牌、换人等时间线记录。</li>
+                <li><strong>队伍与球员档案</strong> —— 提供基础 roster 信息及近期战绩趋势。</li>
+                <li><strong>信息呈现克制</strong> —— 页面避免过度广告铺陈，内容层级以分类卡片和标签页组织，接近知识库式的浏览体验。</li>
+            </ul>
+            <div class="tag-group">
+                <span class="tag-item">实时数据</span>
+                <span class="tag-item">联赛索引</span>
+                <span class="tag-item">响应式界面</span>
+                <span class="tag-item">结构化信息</span>
+            </div>
+        </div>
+
+        <!-- 卡片3：场景与使用提示 -->
+        <div class="card">
+            <div class="card-title">
+                <span class="icon-symbol">🧭</span> 适用场景与理性提示
+            </div>
+            <p>
+                适合日常快速检索体育赛事数据、对比不同联赛积分差异、跟踪特定球队近期状态的用户。站点不提供投注、博彩或任何形式的资金交易服务，所有数据仅供浏览参考，不构成任何建议。如果需要获取官方最终比赛结果，建议交叉核对相应体育协会或联盟的原始公告。
+            </p>
+            <p style="margin-top: 0.6rem;">
+                另外，<a href="https://web-6686sports.com" class="inline-link">6686体育</a> 的内容更新频率受第三方数据源影响，部分次级联赛或杯赛可能存在延迟，建议在关键决策前通过多个渠道验证。本知识库页面仅作为客观介绍，不引导任何非信息浏览行为。
+            </p>
+        </div>
+
+        <!-- 卡片4：FAQ摘要 + 相关信息区 (混合) -->
+        <div class="card">
+            <div class="card-title">
+                <span class="icon-symbol">❓</span> 常见疑问摘要 · 相关信息
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q: 站点是否需要注册或付费才能浏览基础数据？</div>
+                <div class="faq-a">A: 目前大部分联赛数据页面可直接访问，无需注册。部分高级筛选或历史数据归档可能需留意页面说明。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q: 数据来源是否标注？</div>
+                <div class="faq-a">A: 页面内数据通常附带来源标记或更新时间戳，建议以具体页面标注为准。平台本身不生产原始数据，而是做整合呈现。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q: 网站支持哪些语言界面？</div>
+                <div class="faq-a">A: 主要界面语言为简体中文，部分队伍名或联赛名称保留英文缩写。</div>
+            </div>
+            <div style="margin-top: 0.7rem; border-left: 3px solid #debe9c; padding-left: 0.8rem;">
+                <span style="font-weight:500; color:#4a331e;">相关信息：</span> 同类体育数据平台通常也提供 API 接口，但 <a href="https://web-6686sports.com" class="inline-link">6686体育</a> 目前以网页端直接浏览为主，未公开 REST API 文档。移动端适配良好，可在手机浏览器中直接使用。
+            </div>
+        </div>
+
+        <!-- 卡片5：入口按钮（强调链接） -->
+        <div class="card" style="display: flex; flex-direction: column; align-items: flex-start; padding: 1rem 1.8rem;">
+            <div style="font-weight:500; color:#4d321b; font-size:0.95rem; margin-bottom:0.15rem;">→ 站点直达</div>
+            <div class="link-button-card">
+                <a href="https://web-6686sports.com">6686体育</a>
+                <span class="arrow-hint">↗</span>
+            </div>
+            <div style="margin-top: 0.7rem; font-size:0.8rem; color:#73583b;">
+                （链接打开主站，建议使用现代浏览器访问）
+            </div>
+        </div>
+
+    </div><!-- end card-grid -->
+
+    <div class="divider-light"></div>
+
+    <!-- 底部说明（非入口纯描述） -->
+    <div class="footer-note">
+        <span>知识库页面 · 仅作客观信息介绍 · 数据可能变更请以实际站点为准</span><br>
+        <span style="font-size:0.75rem; display:inline-block; margin-top:0.25rem;">© 参考说明 · 版本 2405</span>
+    </div>
+
+</div><!-- end page-container -->
+</body>
+</html>
